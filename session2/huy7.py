@@ -1,0 +1,6 @@
+r1 = range (7)
+r2 = range (100,106)
+r3 = range (9,1,-1)
+print (*r1)
+print (*r2)
+print (*r3)
