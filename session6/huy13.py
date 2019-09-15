@@ -3,7 +3,7 @@ while True:
     taikhoan = input ("Nhap tai khoan:")
     matkhau = input ("nhap mat khau:")
     matkhau2 = input ("nhap lai mat khau:")
-    if @ in matkhau:
+    if '@gmail.com' in email:
         print ("nhap tai khoan thanh công")
         break
     else:
