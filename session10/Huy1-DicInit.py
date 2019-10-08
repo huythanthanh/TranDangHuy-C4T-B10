@@ -1,3 +1,4 @@
+#Init + Input làm chung 1 bài anh nhé
 huy = {
     'Name' : 'Nezuko',
     'Age' : 16,
