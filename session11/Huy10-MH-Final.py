@@ -37,3 +37,5 @@ else :
     print(skills[chon_skill-1]['Minimum level'])
 
 # Nó chỉ đơn giản là phép so sánh thôi đúng ko anh :)?? right :)???    
+# Also cả 2 bài em đều test rồi nma nó vẫn chưa thực sự good... nên đến lớp anh nói "kĩ" 1 chút về vấn đề này nhé
+# Bài này hơi khoai :(((
