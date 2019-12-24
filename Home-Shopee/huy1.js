@@ -114,6 +114,8 @@ $(document).ready(function () {
 
             var productName = $(this).parent().find('h4').get(0).innerHTML;
 
+            console.log(img, productName)
+            console.log("Succed !!!")
             $("body").append('<div class="floating-cart"></div>');
             var cart = $('div.floating-cart');
             $("<img src='" + img.src + "' class='floating-image-large' />").appendTo(cart);
@@ -223,11 +225,26 @@ $(document).ready(function () {
         });
     });
 
-    $('.add_to_cart').click(function () {
+    let listItem = []
+
+    $('.add_to_cart').click(function (e) {
         var productCard = $(this).parent();
         var position = productCard.offset();
         var productImage = $(productCard).find('img').get(0).src;
         var productName = $(productCard).find('.product_name').get(0).innerHTML;
+        console.log(e.target.attributes[1].value)
+
+        listItem.push(
+            {
+                productName: productName,
+                productImage: productImage,
+                id: e.target.attributes[1].value,
+                price: 39
+            }
+        )
+
+        localStorage.setItem("listCart", JSON.stringify(listItem))
+        console.log(listItem)
 
         $("body").append('<div class="floating-cart"></div>');
         var cart = $('div.floating-cart');
@@ -239,7 +256,7 @@ $(document).ready(function () {
             $("body").removeClass("MakeFloatingCart");
 
 
-            var cartItem = "<div class='cart-item'><div class='img-wrap'><img src='" + productImage + "' alt='' /></div><span>" + productName + "</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
+            var cartItem = `<div class='cart-item'><div class='img-wrap'><img src='${productImage}' alt='' /></div><span>${productName}</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item' id=${ e.target.attributes[1].value}></div></div>`;
 
             $("#cart .empty").hide();
             $("#cart").append(cartItem);
@@ -247,8 +264,20 @@ $(document).ready(function () {
 
             $("#cart .cart-item").last()
                 .addClass("flash")
-                .find(".delete-item").click(function () {
+                .find(".delete-item").click(function (event) {
                     $(this).parent().fadeOut(300, function () {
+                        console.log(event)
+                        let getListItem = JSON.parse(localStorage.getItem("listCart"))
+                        
+                        for (let i = 0; i < getListItem.length; i++) {
+                            if(event.target.attributes[1].value == getListItem[i].id) {
+                                if(i > -1) {
+                                    listItem.splice(i, 1)
+                                    getListItem.splice(i, 1)
+                                    localStorage.setItem("listCart", JSON.stringify(getListItem))
+                                }
+                            }
+                        }
                         $(this).remove();
                         if ($("#cart .cart-item").size() == 0) {
                             $("#cart .empty").fadeIn(500);

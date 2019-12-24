@@ -1,0 +1,330 @@
+var videoComplete=false,__zoneID=2662, tkClick=false,isvideoPaused = true,isShowCloseBtn = false,admtime,isVideoready=false ,bannerID,isShowAddon=true,audien=false;
+function showTab(i){
+}
+function getFlashMovie(movieName) {
+	var isIE = navigator.appName.indexOf("Microsoft") != -1;
+	return (isIE) ? document.getElementById(movieName) : document[movieName];
+}
+function showAddon(){
+
+
+	var idAddon=document.getElementById('admTvcAddon');
+	if(idAddon){
+		idAddon.style.visibility='visible'
+		idAddon.style.width = '1px';
+		idAddon.style.height='1px';
+	}
+
+	isShowAddon = true;
+}
+
+function adsAdmComplete(){
+	videoComplete=true;
+	var idAddon=document.getElementById('admTvcAddon');
+	idAddon.innerHTML = '';
+
+}
+function showMedium(){}
+function parentshowMedium(){
+	if(!tkClick){
+		showMedium();
+	}
+}
+function checkMobileSystem() {
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		return true;
+	} else return false;
+}
+
+function  CreateStyleSheet(){
+	var css='',css1='',scW=window.screen.width,scale=(scW>1300)?0.82:0.74;
+	var Browser = {
+		Version: function() {
+			var version = 999; // we assume a sane browser
+			if (navigator.appVersion.indexOf("MSIE") != -1)
+			  // bah, IE again, lets downgrade version number
+			version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+			return version;
+		}
+	}
+	if(Browser.Version()<=8){
+		css1+='top:0px;right:-'+Math.floor(600*(1-scale))+'px;';
+	}
+	if(!parent._parentTvcWide_add){
+		css+='#admTvcExpand{'+css1+' transform: scale('+scale+');transform-origin: 100% 100%;-moz-transform: scale('+scale+');-moz-transform-origin: 100% 100%;-webkit-transform: scale('+scale+');-webkit-transform-origin: 100% 100%;-o-transform: scale('+scale+'); -o-transform-origin: 100% 100%;-ms-filter: progid:DXImageTransform.Microsoft.Matrix(M11='+scale+', M12=0, M21=0, M22='+scale+', SizingMethod="auto auto"); filter: progid:DXImageTransform.Microsoft.Matrix(M11='+scale+', M12=0, M21=0, M22='+scale+', SizingMethod="auto auto");}';
+	}
+
+	doc = document,
+	style = doc.createElement('style');
+	style.type = 'text/css';
+	var head = doc.getElementsByTagName('head')[0];
+	head.appendChild(style);
+	if (style.styleSheet) style.styleSheet.cssText = css;
+	else style.appendChild(doc.createTextNode(css));
+}
+function adm_AddTrackingEvent(a)
+{
+	var rd = Math.random();
+	if(rd <= 0.02)
+	{
+		for( i in a )
+		{
+			var img = document.createElement('img');
+			img.src = a[i];
+		}
+	}
+
+}
+
+
+function admParamTvc(){
+	var a=parent.admParamTvc(),b=a.split(';');
+	b[0]=typeof(parent.arrDataTVCV_add)!='undefined'?parent.arrDataTVCV_add.id:236268;
+	bannerID = b[0];
+	return b.join(';');
+
+}
+
+function createPlayerItvc(par){
+	var player = this;
+	var secureToken = "L3NlY3VyZS92ZXJpZnkveHZxcmNhZGhlYmZpMHY1dm5zM2Ywd3d3a3Y2MDdkMDgvMTAwMjA0L2V5SmhiR2NpT2lKSVV6STFOaUlzSW5SNWNDSTZJa3BYVkNKOS5leUp5WldZaU9pSWlMQ0poY0hCclpYa2lPaUo0ZG5GeVkyRmthR1ZpWm1rd2RqVjJibk16WmpCM2QzZHJkall3TjJRd09DSXNJbkJzWVhsbGNpSTZJakV3TURJd05DSXNJbWxuYm05eVpVVjRjR2x5WVhScGIyNGlPblJ5ZFdVc0ltbGhkQ0k2TVRVeU5Ua3lOemd6TUN3aVpYaHdJam94TlRJMU9USTNPRGt3ZlEuSW1iM2x6SlZyNmtaTnRhSzkyTEJ6b1g4ZUdvRDQ5X2F6MDJaaVlCcG9OTQ";
+	var params = par;
+	var admPlayerVideo;
+	// console.log(JSON.stringify(params));
+	this.drawPlayer = function(idPlayerVideo){
+		playerInitScript(idPlayerVideo, {
+			params: params,
+			secure: secureToken,
+		}, function(){
+            admPlayerVideo = this; // callback tráº£ vá» player khi init thĂ nh cĂ´ng
+            player.loggingInfor();
+            player.checkVastOrVpaid();
+            window.setTimeout(function(){
+            	admPlayerVideo.play();
+
+            },2000);
+            // if(mutexPlayerVideo){mutexPlayerVideo.loggingInfor();mutexPlayerVideo.checkVastOrVpaid();}
+            // if(itvcPlayerVideo){itvcPlayerVideo.loggingInfor();itvcPlayerVideo.checkVastOrVpaid();itvcPlayerVideo.endVast();}
+            isCheckPlayer = true;
+          });
+	}
+	this.play = function(){
+		admPlayerVideo.play();
+	}
+	this.pause =  function(){
+		admPlayerVideo.pause();
+	}
+	this.mute = function(){
+		admPlayerVideo.muted(true);
+	}
+	this.unmute = function(){
+		admPlayerVideo.muted(false);
+	}
+	this.loggingInfor = function(){
+		admPlayerVideo.on("ad:vastresponse", function(evt, vastresponse){
+			admLinkThrough = vastresponse.clickThrough;
+			arrLinkTrackings = vastresponse.clickTrackings;
+		});
+	}
+	this.endVast = function(){
+		admPlayerVideo.on("ad:end", function(){
+			if(admBannerItvc){
+				admBannerItvc.endVideo();
+			}
+		});
+	}
+	this.currentTime =  function(){
+		return admPlayerVideo.currentTime();
+	}
+	this.checkVastOrVpaid =  function(){
+		admPlayerVideo.on("ad:play" , function(event){
+			let adUnit = admPlayerVideo.vastAd.adUnit();
+			let type = adUnit.type;
+
+			if(type == "VAST"){
+				return true;
+			}else{
+				if(isMutexCheck){
+					document.getElementById("BrandInVideo").style.display = "none";
+				}
+				if(isItvcCheck){
+					document.getElementById("canvasIframe").style.display = "none";
+				}
+			}
+		});
+
+	}
+	this.sendTracking7811=function (){
+		window.setTimeout(function(){
+			admPlayerVideo.on('ad:vastresponse', function(evt, vastresponse) {
+				var rd = Math.floor(Math.random()*50);
+				if(rd <1)
+				{
+					let img = document.createElement('img');
+					img.src = vastresponse['clickThrough'];
+
+					for(var i=0;i<vastresponse['clickTrackings'].length;i++)
+					{
+						let img = document.createElement('img');
+						img.src = vastresponse['clickTrackings'][i];
+
+					}
+				}
+			});
+
+		},2000);
+	}
+}
+
+function _admloadJs(d,b,c){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=d;2<=arguments.length&&(a.onload=b,a.onreadystatechange=function(){4!=a.readyState&&"complete"!=a.readyState||b()});a.onerror=function(){if("undefined"!=typeof c)try{c()}catch(e){}};document.getElementsByTagName("head")[0].appendChild(a)};
+
+(function(){
+	var imgHostImage='//admicro2.vcmedia.vn/adt/tvc/player_sticky_hide/';
+	if(parent.admImgHost && parent.ADS_Location=='3'){
+		imgHostImage=imgHostImage.replace("admicro2.","admicro2-hcm.");}
+		// var CreateStyleSheet = function () {
+		// 	var css = '.admTvcAddon{width:1px;height:1px;}',
+		// 	doc = document,
+		// 	style = doc.createElement('style');
+		// 	style.type = 'text/css';
+		// 	var head = doc.getElementsByTagName('head')[0];
+		// 	head.appendChild(style);
+		// 	if (style.styleSheet) style.styleSheet.cssText = css;
+		// 	else style.appendChild(doc.createTextNode(css));}
+
+
+
+
+		// 	CreateStyleSheet();
+		__zoneID=typeof(parent.arrDataTVCV_add)!='undefined'?parent.arrDataTVCV_add.zid:2662;
+
+		try{
+
+			let dm = parent.document.domain,
+			lstZone = {};
+
+			if(checkMobileSystem()){
+				lstZone = {
+					'dantri.com.vn' : 5939,
+					'kenh14.vn' : 5938,
+					'genk' : 5940,
+					'gamek' : 475198,
+					'afamily' : 5942,
+					'autopro' : 5944,
+					'cafef' : 5943,
+					'linkhay' : 5941,
+					'giadinh' : 5945,
+					'sohanews' : 5818,
+					'soha' : 5818,
+					'channelvn' : 2657,
+					'cafebiz' : 5943,
+					'thegioivanhoa' : 6703,
+					'phim14' : 7692,
+					'beta.autopro' : 5944,
+					'vtv' : 23260,
+					'ttvn' : 25438,
+					'thanhnien' : 37079,
+					'docbao' : 7493,
+					'thethaovanhoa' : 6331,
+					'anninhthudo' : 16834,
+					'bongda24h' : 32159,
+					'bongdanet':11227,
+					'laodong':10698,
+					'vtc' : 6300,
+					'tuoitre':488052
+				};
+			}
+			else{
+				lstZone = {
+					'kenh14' : 2656,
+					'dantri' : 2657,
+					'autopro' : 2760,
+					'afamily' : 2763,
+					'genk' : 2658,
+					'gamek' : 475197,
+					'cafef' : 2661,
+					'cafebiz' : 2661,
+					'giadinh' : 2971,
+					'libero' : 4298,
+					'nld' : 2790,
+					'phapluattp' : 2787,
+					'phapluattp' : 2787,
+					'sannhac' : 2762,
+					'socnhi' : 3034,
+					'sohanews' : 2761,
+					'soha' :2761,
+					'suckhoedoisong' : 2972,
+					'vneconomy' : 3385,
+					'beta.autopro' : 2760,
+					'vtv' : 6301,
+					'ttvn' : 25437,
+					'thanhnien' : 37079,
+					'docbao' : 7493,
+					'thethaovanhoa' : 6331,
+					'anninhthudo' : 16834,
+					'bongda24h' : 32159,
+					'bongdanet':11227,
+					'laodong':10698,
+					'ole':42329,
+					'go':42341,
+					'tintuc':42331,
+					'lichthidau':42334,
+					'docbaogiay':42337,
+					'vntinnhanh':42338,
+					'tuoitre':488051,
+					'ale':42340,
+					'bongda':42333,
+					'vtc' : 6300,
+					'sggp':475266,
+					'saigondautu':477879,
+					'sggpnews':477878
+				};
+			}
+
+			for (var i in lstZone) {
+				if(dm.indexOf(i) != -1) __zoneID = lstZone[i];
+			}
+		}catch(e){
+
+		}
+		audien = typeof(parent.arrDataTVCV_add)!='undefined'?parent.arrDataTVCV_add.cpa:0;
+		var html='';
+		window['_widthAddon']=(window['_widthAddon'])?window['_widthAddon']:400;
+		window['_heightAddon']=(window['_heightAddon'])?window['_heightAddon']:500;
+		let timeRD =(new Date).getTime();
+		let linkVast7811 = '//lg1.logging.admicro.vn/proxy?p=' +  encodeURIComponent(encodeURIComponent("2;1;"+ admParamTvc() +";1;0;3;"+__zoneID+";5;0;"+document.domain))+'%26path='+ encodeURIComponent(encodeURIComponent(document.location.pathname+"?r="+Math.floor((Math.random() * 90000) + 10000)));
+		// let linkVast7811 = '//sspapi.admicro.vn/ssp_request/video?u=' + encodeURIComponent(document.domain + document.location.pathname) + '&z=' + __zoneID + '&p=1&w=650&h=300&' + parent.admtvcPgid() + '&pid=&tags=5&bannerid=-1&encodebid=&typead=';
+
+		html += '<div class="admTvcAddon" style="width:1px;height:1px;"><video id="video-tag"></video></div>';
+		var tvcpzone=(typeof(parent.tvcvzone)!='undefined')?parent.tvcvzone:parent.tvcpzone;
+		document.write(html);
+
+		window.setTimeout(function(){
+			_admloadJs('//adminplayer.sohatv.vn/resource/init-script/playerInitScript.js', function(){
+				var par = {
+					file: "//nb8.mediacdn.vn/dev558/0/035/131/0035131502.mp4",
+					_site:"kenh14",
+					vast: linkVast7811,
+					zonePlayer:7811,
+					skipads: false,
+					autoplay: false,
+					replay: false,
+					onlyAds: true,
+					typeAds: "iTVC",
+					idAds: "iTVC1",
+					tvcOption: "mutex",
+					_controlbar:"hide",
+					boxVideoID: "boxSponsorVideo",
+					filler: false,
+					mute: true,
+					poster: ""
+				};
+				if(document.getElementById("video-tag")){
+					mutexPlayerVideo = new createPlayerItvc(par);
+					mutexPlayerVideo.drawPlayer("video-tag");
+					mutexPlayerVideo.sendTracking7811();
+				}
+			});
+
+		}, 1000);
+	})();

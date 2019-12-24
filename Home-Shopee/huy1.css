@@ -3,7 +3,6 @@
 * { margin: 0px; padding: 0px; }
 body {
 	font-family: "Open Sans", sans-serif; 
-	overflow:hidden;	
 }
 #wrapper{
 	overflow: hidden;
@@ -13,7 +12,7 @@ body {
 }
 #header{
 	height:92px; 
-	background:#fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/header-icons.png") 1448px -2px no-repeat;
+	background:orange url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/header-icons.png") 1448px -2px no-repeat;
 	border-bottom:1px solid #eee;
 }
 #header ul{padding:33px 0 0 45px;}
@@ -745,7 +744,7 @@ div.cart-icon-top{
 	height:3px;
 	z-index:1;
 	top: 140px;
-	left: 90px;
+	left: 100px;
 }
 div.cart-icon-bottom{
 	position:absolute;
@@ -755,7 +754,7 @@ div.cart-icon-bottom{
 	height:19px;
 	z-index:1;
 	top: 143px;
-	left: 90px;
+	left: 100px;
 }
 body.MakeFloatingCart div.cart-icon-top{z-index:30;}
 body.MakeFloatingCart div.cart-icon-bottom{z-index:300;}	

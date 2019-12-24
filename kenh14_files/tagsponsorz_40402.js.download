@@ -1,0 +1,58 @@
+admAdEplchk=void 0;var admsponsorAds=function(d){var e=function(b,c){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=b;2<=arguments.length&&(a.onload=c,a.onreadystatechange=function(){4!=a.readyState&&"complete"!=a.readyState||c()});document.getElementsByTagName("head")[0].appendChild(a)};d._spschkdevice=!1;return function(b){"function"==typeof spszFilter?new spszFilter(b):e("//media1.admicro.vn/core/boxapp/sponsor/tagspszFilter.js",function(){new spszFilter(b)})}}(window);admsponsorAds({ZONEID:40402, data:[
+    {
+        "channel_ids": "",
+        "r": 1,
+        "news_ids": "",
+        "tags_exclude": "",
+        "channel_ids_type": 0,
+        "f": 0,
+        "sponsor_test": 0,
+        "hash_tag_type": 1,
+        "ranking": 1,
+        "bid": 554399,
+        "cid": 1299778,
+        "tags": "trai-nghiem-dieu-ky,vui-choi-lam-ban,omo-viet-nam"
+    },
+    {
+        "channel_ids": "",
+        "r": 1,
+        "news_ids": "",
+        "tags_exclude": "",
+        "channel_ids_type": 0,
+        "f": 0,
+        "sponsor_test": 0,
+        "hash_tag_type": 1,
+        "ranking": 1,
+        "bid": 554811,
+        "cid": 1299941,
+        "tags": "omo-matic,trongcaytrongtrainghiem,omo-mattic,phuxanhvietnam"
+    },
+    {
+        "channel_ids": "387",
+        "r": 1,
+        "news_ids": "",
+        "tags_exclude": "",
+        "channel_ids_type": 1,
+        "f": 0,
+        "sponsor_test": 0,
+        "hash_tag_type": 0,
+        "ranking": 1,
+        "bid": 554709,
+        "cid": 1299884,
+        "tags": ""
+    },
+    {
+        "channel_ids": "",
+        "r": 1,
+        "news_ids": "",
+        "tags_exclude": "",
+        "channel_ids_type": 0,
+        "f": 0,
+        "sponsor_test": 0,
+        "hash_tag_type": 1,
+        "ranking": 1,
+        "bid": 555281,
+        "cid": 1300175,
+        "tags": "beckstage,batngosangkhoai,becksice"
+    }
+], block:""})

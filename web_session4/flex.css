@@ -1,0 +1,36 @@
+.w-100 {
+    width: 100%;
+}
+
+.h-500px {
+    height: 600px;
+}
+
+.bg-gray {
+    background-color: gray;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.w-250px {
+    width: 250px;
+}
+
+.h-200px {
+    height: 200px;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.m-4px {
+    margin: 10px;
+}
+
+#container {
+    flex-flow: row wrap;
+    align-items: space-arround;
+}

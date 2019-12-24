@@ -1,0 +1,51 @@
+(function(){
+if (typeof(_admguid) == "undefined") {
+var _admguid = ADM_AdsTracking.get("__uid");
+}
+var dataTvc={
+"ZONEID":7811,
+"TYPE":3,
+"CAMPLIST": ["1024393","1065540","1298028"],
+"CAMPLOCA": {"1065540":"1,2,3","1024393":"3","1298028":"2"},
+"NORMAL": {"1065540":{"342850":{"color":"0","campaignid":"1065540","file_name":"0","link3rd":"","sex":"0","format":1,"linkclick":"https:\/\/www.youtube.com\/watch?v=asy0ia3XI3A","l":"1,2,3","fr":"0","htmltemplate":"<script type=\"text\/javascript\" src=\"https:\/\/adi.admicro.vn\/adt\/cpc\/tvcads\/files\/js\/1114\/data_add_v3.js\"><\/script>","path":"0","cpa":"0","tmp":null,"id":"342850","items":{"k0":{"":""},"htmltemplate":"<script type=\"text\/javascript\" src=\"https:\/\/adi.admicro.vn\/adt\/cpc\/tvcads\/files\/js\/1114\/data_add_v3.js\"><\/script>"},"height":"0"}},"1024393":{"271865":{"color":"0","campaignid":"1024393","file_name":"0","link3rd":"","sex":"1","format":1,"linkclick":null,"l":"3","fr":"0","htmltemplate":"<script type=\"text\/javascript\" src=\"https:\/\/adi.admicro.vn\/adt\/cpc\/tvcads\/files\/js\/tracking\/h-tk.js\"><\/script>","path":"0","cpa":"0","tmp":null,"id":"271865","items":{"k0":{"":""},"htmltemplate":"<script type=\"text\/javascript\" src=\"https:\/\/adi.admicro.vn\/adt\/cpc\/tvcads\/files\/js\/tracking\/h-tk.js\"><\/script>"},"height":"0"}},"1298028":{"550455":{"color":"0","campaignid":"1298028","file_name":"0","link3rd":"","sex":"2","format":1,"linkclick":"https:\/\/www.youtube.com\/watch?v=asy0ia3XI3A","l":"2","fr":"0","htmltemplate":"<script type=\"text\/javascript\" src=\"https:\/\/adi.admicro.vn\/adt\/cpc\/tvcads\/files\/js\/1114\/data_add_v3.js\"><\/script>","path":"0","cpa":"0","tmp":null,"id":"550455","items":{"k0":{"":""},"htmltemplate":"<script type=\"text\/javascript\" src=\"https:\/\/adi.admicro.vn\/adt\/cpc\/tvcads\/files\/js\/1114\/data_add_v3.js\"><\/script>"},"height":"0"}}}
+};
+var sp = ADS_CHECKER.getQuery('sp');
+var i = ADS_CHECKER.getQuery('i');
+var chk = false;
+if (sp == 'tvctracking') {
+chk=true;
+}
+if (chk) {
+var strurl = "//pson.logging.admicro.vn/dmtb?h=" + _admguid + "&u=" + encodeURIComponent(document.URL) + "&p=tvctracking&zid="+dataTvc.ZONEID+"&n=0,"+(document.domain!='dantri.com.vn'?(ADS_CHECKER.wdWidth()-40):'-1')+"&loc=" + ADS_City + "&bs=" + i;
+} else {
+var strurl = "//pson.logging.admicro.vn/dmtb?h=" + _admguid + "&u=" + encodeURIComponent(document.URL) + "&p=tvc&zid="+dataTvc.ZONEID+"&n=0,"+(document.domain!='dantri.com.vn'?(ADS_CHECKER.wdWidth()-40):'-1')+"&loc=" + ADS_City;
+}
+var strkey='__dmtb'+dataTvc.ZONEID;
+_admloadJs(strurl,function(){
+if (typeof(window[strkey]) != undefined && window[strkey] != null && typeof(window[strkey]) == 'object' && typeof(window[strkey]) == 'object' && window[strkey].length >= 1 && typeof(window[strkey][0]) == 'object') {
+var dtcpg={};
+
+for(var i=0,len=window[strkey].length; i<len; i++){
+if(typeof(dtcpg[window[strkey][i].campaignid])=='undefined'){
+dtcpg[window[strkey][i].campaignid]={};
+dtcpg[window[strkey][i].campaignid][window[strkey][i].id]=window[strkey][i];
+}else{
+
+dtcpg[window[strkey][i].campaignid][window[strkey][i].id]=window[strkey][i];
+}
+}
+dataTvc.NORMAL1=dataTvc.NORMAL;
+dataTvc.NORMAL=dtcpg;
+}
+try{
+if(typeof(window[strkey]) != undefined && window[strkey] != null && typeof(window[strkey]) == 'object' && typeof(window[strkey]) == 'object' && window[strkey].length >= 1  && (window[strkey][0] <1) ){
+AdmLoadDefault('tvcv'+'zone');
+return false;
+}
+}catch(e){}
+var tvcvzone_7811_format = new TVCVZonesAdd();
+tvcvzone_7811_format.InitScript();
+tvcvzone_7811_format.OnLoaded(dataTvc);
+
+});
+})();

@@ -1,0 +1,22 @@
+.search{
+    width: 200px;
+
+}
+.bgcolor1{
+    background-color: rgb(228, 215, 98);
+}
+.w1{
+    width: 100px;
+}
+.h1{
+    height:200px;
+}
+.flex1{
+    display: flex;
+}
+
+ #container{
+    flex-flow: row wrap; 
+    align-items:flex-end;
+    justify-content: space around;
+} 

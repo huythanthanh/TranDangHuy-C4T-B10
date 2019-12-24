@@ -1,0 +1,98 @@
+function AdmZones_sponsorzone() {
+    var aThis = this;
+    var core_vp_pc;
+    this.dataItem = [];
+    this.maxItem = 5;
+    this.minItem = 3;
+    this.zoneid = -1;
+    this.InitScript = function() {};
+
+    this.CreateStyleSheet = function() {
+        var woff = '//adi.admicro.vn/adt/adn/utmswiss.woff';
+        var ttf = '//adi.admicro.vn/adt/adn/utmswiss.ttf';
+        var bghead = '#ec5f5f';
+        var colorinfo = '#ec5f5f';
+        var domain = document.domain;
+        if (domain.indexOf('kenh14.vn') > -1) bghead = '#eea50c';
+        else if (domain.indexOf('giadinh.net.vn') > -1) bghead = '#df4d64';
+        else if (domain.indexOf('soha.vn') > -1) {
+            bghead = '#008375';
+            colorinfo = '#808080';
+        } else if (domain.indexOf('cafef.vn') > -1) {
+            bghead = '#ff5252';
+            colorinfo = '#ff5252';
+        } else if (domain.indexOf('vneconomy.vn') > -1) {
+            bghead = '#ed4848';
+            colorinfo = '#ff5252';
+        } else if (domain.indexOf('sannhac.com') > -1) {
+            bghead = '#004048';
+            colorinfo = '#4a959c';
+        } else if (domain.indexOf('autopro.com.vn') > -1) { bghead = '#C30204'; }
+        var css = '@font-face{font-family:UTMswiss;src:url(' + woff + ') format("woff"),url(' + ttf + ') format("truetype")}.sponsorzone_clearfix,html[xmlns] .sponsorzone_clearfix{display:block}.sponsorzone_clearfix:after{clear:both;content:".";display:block;height:0;visibility:hidden;line-height:0;font-size:1px;overflow:hidden}#sponsorzone_box p{padding:0;margin:0}#sponsorzone_box ul,li{list-style-type:none;padding:0;margin:0}#sponsorzone_box{width:300px;margin:0 auto;font-family:Arial;font-size:12px;}#sponsorzone_box *{-webkit-box-sizing:content-box!important;-moz-box-sizing:content-box!important;box-sizing:content-box!important}.sponsorzone_utm{font-family:UTMswiss,Arial,Sans-Serif!important}#sponsorzone_head{width:100%;background:' + bghead + ';height:36px}#sponsorzone_head .sponsorzone_lh{color:#fff;font-size:18px;margin-left:12px;height:36px;line-height:36px;text-align: left!important;}#sponsorzone_line{background:#e4e4e4;height:18px;line-height:18px;padding-left:12px;font-size:11px;color:#a0a1a2;text-align: left!important;}#sponsorzone_line a{height:18px;line-height:18px;font-size:11px;color:#a0a1a2;text-decoration: none;}#sponsorzone_main{background:#fff;border-bottom:#d3d3d3 2px solid;float:left;width:100%}.noborderT{border-top:0!important}.noborderB{border-bottom:0!important}#sponsorzone_ads{padding:12px;width:276px;float:left;border-bottom:1px #e3e3e3 solid;border-top:2px #fff solid;background:#f3f3f3}#sponsorzone_ads .sponsorzone_thumb{width:50px !important;height:50px !important;border:0;float:left}#sponsorzone_ads .sponsorzone_cont{width:214px;float:right;text-align: left;}#sponsorzone_ads .sponsorzone_info{margin-bottom:6px;font-family:tahoma;color:#808080;font-weight:700;line-height: 10px;}#sponsorzone_ads .sponsorzone_info:hover{text-decoration: underline;cursor: pointer;}#sponsorzone_ads .sponsorzone_title,#sponsorzone_ads .sponsorzone_title a {color:#454545;font-size:16px;text-decoration: none;line-height:19px}#sponsorzone_ads .sponsorzone_title a:hover {color:#3b5998;}#sponsorzone_ads .sponsorzone_views,#sponsorzone_ads .sponsorzone_views a{font-size:12px;color:#b0b0b0;font-family:tahoma!important;  display: inline-block;}#sponsorzone_ads .sponsorzone_views a:hover{color:#b0b0b0;text-decoration: underline;}#sponsorzone_ads .sponsorzone_dom{font-size:12px;color:#b0b0b0;font-family:tahoma;margin-top:5px;line-height: 10px;}';
+        css = css.replace(/sponsorzone/gi, 'sponsorzone_' + aThis.zoneid);
+        core_vp_pc.buildCss(css);
+    };
+
+    this.DrawBanner = function() {
+        var docBizone = document.getElementById('sponsorzone_items'+ aThis.zoneid);
+        var herftadv = '//viewplus.vn';
+        __Admcounter(8);
+        var output = '<div id="sponsorzone_box" class="sponsorzone_clearfix"><div id="sponsorzone_head"><div class="sponsorzone_lh sponsorzone_utm">HỌ NÓI VỀ CHÚNG TÔI </div></div><div id="sponsorzone_line"><a href="' + herftadv + '" title="Powered by View Plus" target="_blank">Powered by <b>View Plus</b></a> </div><div id="sponsorzone_main">';
+        for (var j = 0; j < aThis.maxItem; j++) {
+            var item = aThis.dataItem[j];
+            var urllog = core_vp_pc.sendUrlViewPlus(item,aThis.maxItem);
+            var imgadv = item.image;
+            var titadv = item.title;
+            var titadvc = core_vp_pc.getSubString(titadv, 82);
+            var advinfo = item.bname;
+            var noborderT = (j === 0) ? ' class="noborderT"' : '';
+            var noborderB = (j === aThis.maxItem - 1) ? ' class="noborderB"' : '';
+
+            var sub_conadv = core_vp_pc.capitaliseFirstLetter(item.after_title);
+
+            output += '<div id="sponsorzone_ads" ' + noborderT + ' ' + noborderB + '><div class="sponsorzone_cont"><p class="sponsorzone_info"> ' + advinfo + ' </p><p class="sponsorzone_title sponsorzone_utm"> <a href="' + urllog + '" title="' + titadv + '" target="_blank">' + titadvc + '</a> <span class="sponsorzone_views"><a href="javascript:void(0)" target="_blank" id="sponsorzone_txtviewadv_' + j + '"></a></span> </p><p class="sponsorzone_dom">' + sub_conadv + '</p></div><a href="' + urllog + '" title="' + titadv + '" target="_blank"> <img src="' + imgadv + '" class="sponsorzone_thumb" border="0" title="' + titadv + '" alt="' + titadv + '"/> </a></div>';
+
+        }
+        output += '</div></div>';
+        if (docBizone) {
+            output = output.replace(/sponsorzone/gi, 'sponsorzone_' + aThis.zoneid);
+            docBizone.innerHTML = output;
+        }
+        core_vp_pc.timeLog();
+    }
+
+    this.loadFrame = function() {
+        var output = '<div id="sponsorzone_items'+ aThis.zoneid+'"></div>';
+        try {
+            var docZone = document.getElementById('sponsorzone_'+aThis.zoneid);
+            try {
+                if (docZone) {
+                    docZone.innerHTML = output;
+                }
+            } catch (e) {console.log(e)}
+        } catch (e) {console.log(e)}
+    }
+
+    this.OnLoaded = function(data) {
+        aThis.zoneid = data['ZONEID'];
+        var initLoad=function () {
+            core_vp_pc = new core_vplus_pc(data,aThis.maxItem);
+            aThis.dataItem = core_vp_pc.dataItem();
+            if(typeof aThis.dataItem === 'object' && aThis.dataItem.length >= aThis.minItem){
+                aThis.maxItem = (aThis.dataItem.length >= aThis.maxItem)? aThis.maxItem : aThis.dataItem.length;
+                aThis.CreateStyleSheet();
+                aThis.loadFrame();
+                aThis.DrawBanner();
+            }else{
+                AdmLoadDefault('sponsorzone');
+                return false;
+            }
+        };
+        if(typeof core_vplus_pc == 'undefined'){
+            _admloadJs('//media1.admicro.vn/core/viewplus/core_viewplus_pc.js',function () {initLoad();})
+        }else{
+            initLoad();
+        }
+    }
+
+}
